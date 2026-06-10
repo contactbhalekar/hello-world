@@ -1,0 +1,23 @@
+name: Add Commit Comment on Push
+
+on:
+  push:
+    branches:
+      - master # Triggers on pushes to the master branch
+
+jobs:
+  add-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create commit comment
+        uses: peter-evans/commit-comment@v3
+        with:
+          body: |
+            ### 🚀 Code Pushed Successfully!
+            
+            This commit was automatically processed by GitHub Actions.
+            * **Author:** ${{ github.event.head_commit.author.name }}
+            * **Branch:** ${{ github.ref_name }}
+            * **Timestamp:** ${{ github.event.head_commit.timestamp }}
+            
+            Great job keeping the repository updated!
